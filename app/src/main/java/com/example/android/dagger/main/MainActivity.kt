@@ -40,26 +40,11 @@ class MainActivity : AppCompatActivity() {
      * else carry on with MainActivity
      */
     override fun onCreate(savedInstanceState: Bundle?) {
+        (application as MyApplication).appComponent.userManager().userComponent!!.inject(this)
+
         super.onCreate(savedInstanceState)
-
-        // 2) Grab userManager from appComponent to check if the user is logged in or not
-        val userManager = (application as MyApplication).appComponent.userManager()
-
-        if (!userManager.isUserLoggedIn()) {
-            if (!userManager.isUserRegistered()) {
-                startActivity(Intent(this, RegistrationActivity::class.java))
-                finish()
-            } else {
-                startActivity(Intent(this, LoginActivity::class.java))
-                finish()
-            }
-        } else {
-            setContentView(R.layout.activity_main)
-            // 3) If the MainActivity needs to be displayed, we get the UserComponent
-            // from the application graph and gets this Activity injected
-            userManager.userComponent!!.inject(this)
-            setupViews()
-        }
+        setContentView(R.layout.activity_main)
+        setupViews()
     }
 
     /**
