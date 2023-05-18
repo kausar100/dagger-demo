@@ -2,7 +2,6 @@ package com.example.android.dagger.user
 
 import com.example.android.dagger.main.MainActivity
 import com.example.android.dagger.settings.SettingsActivity
-import com.example.android.dagger.splash.SplashActivity
 import dagger.Subcomponent
 
 @LoggedUserScope
