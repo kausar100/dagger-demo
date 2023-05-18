@@ -31,11 +31,6 @@ class SplashActivity : AppCompatActivity() {
             WindowManager.LayoutParams.FLAG_FULLSCREEN
         )
 
-        // 2) Grab userManager from appComponent to check if the user is logged in or not
-        val userManager = (application as MyApplication).appComponent.userManager()
-        splashViewModel.selectNextScreen(userManager)
-
-
         Handler(Looper.getMainLooper()).postDelayed({
             when (splashViewModel.splashState) {
                 SplashToRegistration -> {

@@ -1,24 +1,22 @@
 package com.example.android.dagger.splash
 
+import com.example.android.dagger.di.ActivityScope
 import com.example.android.dagger.user.UserManager
 import javax.inject.Inject
 
-class SplashViewModel @Inject constructor() {
-
-    lateinit var splashState: SplashViewState
-
-    fun selectNextScreen(userManager: UserManager): SplashViewState {
-        splashState = if (!userManager.isUserLoggedIn()) {
-            if (!userManager.isUserRegistered()) {
-                SplashToRegistration
+@ActivityScope
+class SplashViewModel @Inject constructor(val userManager: UserManager) {
+    val splashState: SplashViewState
+        get() =
+            if (!userManager.isUserLoggedIn()) {
+                if (!userManager.isUserRegistered()) {
+                    SplashToRegistration
+                } else {
+                    SplashToLogin
+                }
             } else {
-                SplashToLogin
+                SplashToMain
             }
-        } else {
-            SplashToMain
-        }
 
-        return splashState
-    }
 
 }
